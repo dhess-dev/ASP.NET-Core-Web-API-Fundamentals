@@ -57,5 +57,4 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
 app.UseEndpoints(endpoins => { endpoins.MapControllers(); });
-
 app.Run();
