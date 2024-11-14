@@ -7,16 +7,19 @@ namespace CityInfo.Api.Controllers;
 [Route("api/[controller]")]
 public class CitiesController : ControllerBase
 {
+    private readonly CitiesDataStore _citiesDataStore;
+    public CitiesController(CitiesDataStore citiesDataStore) => _citiesDataStore = citiesDataStore;
+
     [HttpGet]
     public ActionResult<IEnumerable<CityDto>> GetCities()
     {
-        return Ok(CitiesDataStore.Current.Cities);
+        return Ok(_citiesDataStore.Cities);
     }
 
     [HttpGet("{id}")]
     public ActionResult<CityDto> GetCity(int id)
     {
-        var cityToReturn = CitiesDataStore.Current.Cities.FirstOrDefault(x => x.Id == id);
+        var cityToReturn = _citiesDataStore.Cities.FirstOrDefault(x => x.Id == id);
 
         if (cityToReturn is null)
         {
